@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAIMUZ HAPPY - Combo Especial $80.000 COP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    .gradient-text { background: linear-gradient(90deg, #facc15, #ea580c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .float-animation { animation: float 3s ease-in-out infinite; }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(250, 204, 21, 0.4); } 50% { box-shadow: 0 0 40px rgba(250, 204, 21, 0.8); } }
+    .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .hero-image { transition: transform 0.5s ease; }
+    .hero-image:hover { transform: scale(1.05) rotate(2deg); }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-black text-white">
+
+  <!-- Header fijo -->
+  <header id="header" class="fixed top-0 w-full z-50 transition-all duration-300 bg-black/80 backdrop-blur-md md:bg-transparent md:backdrop-blur-none">
+    <div class="max-w-7xl mx-auto px-3 py-2 md:px-4 md:py-4 flex justify-between items-center">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-1">
+        <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center">
+          <span class="text-black font-black text-sm md:text-lg">D</span>
+        </div>
+        <div class="text-lg md:text-2xl font-bold">
+          <span class="text-white">DAIMUZ</span>
+          <span class="text-yellow-400 hidden sm:inline"> HAPPY</span>
+        </div>
+      </a>
+      
+      <!-- Precio + Botón -->
+      <div class="flex items-center gap-2 md:gap-4">
+        <div class="hidden sm:block text-right">
+          <div class="text-xs text-gray-400 line-through">$120.000</div>
+          <div class="text-sm md:text-base font-bold text-yellow-400">$80.000 COP</div>
+        </div>
+        <a href="#precio" class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-3 py-2 md:px-6 md:py-3 rounded-full font-bold hover:scale-105 transition-transform shadow-lg text-xs md:text-sm flex items-center gap-1">
+          <span>🛒</span>
+          <span class="hidden xs:inline">COMPRAR</span>
+          <span class="xs:hidden">$80K</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section con imagen principal -->
+  <section class="pt-28 pb-16 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-purple-500/10 blur-3xl"></div>
+    <div class="max-w-6xl mx-auto relative z-10">
+      
+      <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <!-- Texto -->
+        <div class="text-center lg:text-left order-2 lg:order-1">
+          <div class="inline-block bg-yellow-400/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4 border border-yellow-400/50">
+            <span class="text-yellow-400 font-semibold text-sm">✨ OFERTA ESPECIAL - COMBO COMPLETO</span>
+          </div>
+          
+          <h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight">
+            Relájate en <span class="gradient-text">Segundos</span>
+            <br />Sin Llamar la Atención
+          </h1>
+          
+          <p class="text-lg md:text-xl text-gray-300 mb-6 max-w-xl">
+            Con solo 3 puffs siente una relajación inmediata, sin humo, sin olores y 100% discreto
+          </p>
+
+          <!-- Contador regresivo -->
+          <div class="flex justify-center lg:justify-start gap-3 mb-6">
+            <div class="bg-gradient-to-b from-yellow-500 to-yellow-600 rounded-lg p-3 min-w-[70px] text-center">
+              <div id="hours" class="text-2xl font-bold text-black">02</div>
+              <div class="text-xs text-black/80 font-semibold">HORAS</div>
+            </div>
+            <div class="bg-gradient-to-b from-yellow-500 to-yellow-600 rounded-lg p-3 min-w-[70px] text-center">
+              <div id="minutes" class="text-2xl font-bold text-black">34</div>
+              <div class="text-xs text-black/80 font-semibold">MINUTOS</div>
+            </div>
+            <div class="bg-gradient-to-b from-yellow-500 to-yellow-600 rounded-lg p-3 min-w-[70px] text-center">
+              <div id="seconds" class="text-2xl font-bold text-black">15</div>
+              <div class="text-xs text-black/80 font-semibold">SEGUNDOS</div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-6">
+            <a href="#precio" class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-transform shadow-2xl flex items-center justify-center gap-2 pulse-glow">
+              🛒 ORDENAR AHORA - $80.000
+            </a>
+            <a href="#demo" class="bg-white/10 backdrop-blur-sm border-2 border-white/30 px-8 py-4 rounded-full text-lg font-bold hover:bg-white/20 transition-all text-center">
+              ▶ Ver Video
+            </a>
+          </div>
+
+          <div class="flex flex-wrap justify-center lg:justify-start gap-4 text-sm">
+            <span class="text-gray-300">✅ Garantía 1 Año</span>
+            <span class="text-gray-300">✅ Pago Contra Entrega</span>
+          </div>
+        </div>
+
+        <!-- Imagen Principal del Combo -->
+        <div class="order-1 lg:order-2 flex justify-center">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-yellow-400/30 to-orange-500/30 rounded-3xl blur-2xl"></div>
+            <img 
+              src="public/image/COMBO DAIMUZ HAPPY.jpg" 
+              alt="Combo DAIMUZ HAPPY - Incluye vaporizador, cable USB y accesorios" 
+              class="relative rounded-2xl shadow-2xl hero-image max-w-full h-auto float-animation"
+              style="max-height: 450px; object-fit: contain;"
+            >
+            <div class="absolute -bottom-4 -right-4 bg-red-500 text-white px-4 py-2 rounded-full font-bold text-sm animate-bounce">
+              🔥 COMBO COMPLETO
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <svg class="w-8 h-8 mx-auto animate-bounce text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Presentaciones (Gris y Negro) -->
+  <section class="py-16 px-4 bg-gradient-to-b from-black to-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-4">
+        🎨 Dos Presentaciones <span class="text-yellow-400">Elegantes</span>
+      </h2>
+      <p class="text-xl text-gray-300 text-center mb-12">Elige el color que más te guste: Gris o Negro</p>
+      
+      <div class="flex justify-center">
+        <div class="relative group">
+          <div class="absolute -inset-2 bg-gradient-to-r from-gray-500/30 to-gray-700/30 rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
+          <img 
+            src="public/image/presentacion gris y negro.jpg" 
+            alt="DAIMUZ HAPPY en presentación Gris y Negro" 
+            class="relative rounded-2xl shadow-2xl max-w-full h-auto transition-transform hover:scale-105"
+            style="max-height: 500px; object-fit: contain;"
+          >
+        </div>
+      </div>
+      
+      <div class="flex justify-center gap-6 mt-8">
+        <div class="bg-gray-800 rounded-xl px-6 py-3 border border-gray-600 hover:border-yellow-400 transition-colors">
+          <span class="text-2xl">⚫</span>
+          <span class="ml-2 font-semibold">Negro Elegante</span>
+        </div>
+        <div class="bg-gray-800 rounded-xl px-6 py-3 border border-gray-600 hover:border-yellow-400 transition-colors">
+          <span class="text-2xl">🩶</span>
+          <span class="ml-2 font-semibold">Gris Sofisticado</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Demo Section -->
+  <section id="demo" class="py-16 px-4 bg-gradient-to-b from-gray-900 to-black">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-4">
+        🎬 Mira el <span class="text-yellow-400">Producto en Acción</span>
+      </h2>
+      <p class="text-xl text-gray-300 text-center mb-12">Descubre cómo funciona y todo lo que incluye el combo</p>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Video Combo -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
+          <div class="relative bg-gray-900 rounded-2xl overflow-hidden">
+            <video 
+              controls 
+              class="w-full rounded-2xl"
+              poster="public/image/COMBO DAIMUZ HAPPY.jpg"
+            >
+              <source src="public/video/comdaimuzhapp.mp4" type="video/mp4">
+              Tu navegador no soporta video HTML5.
+            </video>
+            <div class="p-4 bg-gray-800/50">
+              <h3 class="font-bold text-lg text-yellow-400">📦 Unboxing del Combo</h3>
+              <p class="text-gray-400 text-sm">Mira todo lo que incluye tu DAIMUZ HAPPY</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Uso -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
+          <div class="relative bg-gray-900 rounded-2xl overflow-hidden">
+            <video 
+              controls 
+              class="w-full rounded-2xl"
+              poster="public/image/presentacion gris y negro.jpg"
+            >
+              <source src="public/video/usandoproduc.mp4" type="video/mp4">
+              Tu navegador no soporta video HTML5.
+            </video>
+            <div class="p-4 bg-gray-800/50">
+              <h3 class="font-bold text-lg text-yellow-400">💨 Cómo Usarlo</h3>
+              <p class="text-gray-400 text-sm">Tutorial rápido de uso del producto</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de problema -->
+  <section class="py-16 px-4 bg-gradient-to-b from-black to-gray-900">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">¿Día Pesado? 😮‍💨</h2>
+      <p class="text-xl text-gray-300 mb-12">
+        Sabemos lo que es tener un día estresante y necesitar un momento para ti mismo...
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <div class="bg-red-900/20 border border-red-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform">
+          <div class="text-5xl mb-4">🚫</div>
+          <h3 class="text-xl font-bold mb-2 text-red-300">Humo molesto</h3>
+          <p class="text-gray-400">Quedar oliendo mal todo el día</p>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform">
+          <div class="text-5xl mb-4">👀</div>
+          <h3 class="text-xl font-bold mb-2 text-red-300">Llamar atención</h3>
+          <p class="text-gray-400">Miradas y comentarios incómodos</p>
+        </div>
+        <div class="bg-red-900/20 border border-red-500/30 rounded-2xl p-6 backdrop-blur-sm hover:scale-105 transition-transform">
+          <div class="text-5xl mb-4">⏰</div>
+          <h3 class="text-xl font-bold mb-2 text-red-300">Poco práctico</h3>
+          <p class="text-gray-400">Perder tiempo en preparación</p>
+        </div>
+      </div>
+
+      <div class="text-4xl font-bold mb-4 text-yellow-400">¡Eso se acabó HOY! 🎯</div>
+    </div>
+  </section>
+
+  <!-- Beneficios principales -->
+  <section class="py-16 px-4 bg-gradient-to-b from-gray-900 to-black">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">
+        🔥 Ideal para Usar en <span class="text-yellow-400">Cualquier Momento</span>
+      </h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-yellow-400 transition-all hover:scale-105 group">
+          <div class="text-yellow-400 mb-4 text-4xl">🛡️</div>
+          <h3 class="text-2xl font-bold mb-3">No deja olor</h3>
+          <p class="text-gray-400">Totalmente discreto, nadie lo notará</p>
+        </div>
+        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-yellow-400 transition-all hover:scale-105 group">
+          <div class="text-yellow-400 mb-4 text-4xl">⚡</div>
+          <h3 class="text-2xl font-bold mb-3">Diseño elegante</h3>
+          <p class="text-gray-400">Compacto y sofisticado para llevar contigo</p>
+        </div>
+        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-yellow-400 transition-all hover:scale-105 group">
+          <div class="text-yellow-400 mb-4 text-4xl">✅</div>
+          <h3 class="text-2xl font-bold mb-3">Fácil de usar</h3>
+          <p class="text-gray-400">Solo presiona y disfruta en segundos</p>
+        </div>
+        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-yellow-400 transition-all hover:scale-105 group">
+          <div class="text-yellow-400 mb-4 text-4xl">⏱️</div>
+          <h3 class="text-2xl font-bold mb-3">Efecto rápido</h3>
+          <p class="text-gray-400">Siente los resultados inmediatamente</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Control de niveles -->
+  <section class="py-16 px-4 bg-gradient-to-b from-black to-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-6">
+        🔥 Control Total con <span class="text-yellow-400">3 Niveles</span>
+      </h2>
+      <p class="text-xl text-gray-300 text-center mb-12">Adapta la intensidad según tu momento 👇</p>
+      
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <button onclick="setLevel('red')" id="btn-red" class="px-6 py-3 rounded-full font-bold transition-all bg-gray-700 text-gray-400 hover:bg-gray-600">
+          NIVEL ROJO
+        </button>
+        <button onclick="setLevel('blue')" id="btn-blue" class="px-6 py-3 rounded-full font-bold transition-all bg-blue-500 text-white shadow-2xl scale-110">
+          NIVEL AZUL
+        </button>
+        <button onclick="setLevel('green')" id="btn-green" class="px-6 py-3 rounded-full font-bold transition-all bg-gray-700 text-gray-400 hover:bg-gray-600">
+          NIVEL VERDE
+        </button>
+      </div>
+
+      <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-10 border-2 border-yellow-400/50 shadow-2xl">
+        <div class="flex items-center justify-center gap-6 mb-6">
+          <div id="level-circle" class="w-28 h-28 rounded-full bg-blue-500 flex items-center justify-center shadow-2xl animate-pulse">
+            <span id="level-voltage" class="text-3xl font-black text-white">3.3V</span>
+          </div>
+        </div>
+        
+        <h3 id="level-title" class="text-2xl font-bold text-center mb-3">NIVEL AZUL</h3>
+        <p id="level-desc" class="text-lg text-gray-300 text-center max-w-2xl mx-auto">Equilibrio perfecto entre sabor, suavidad y efecto</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="py-16 px-4 bg-gradient-to-b from-gray-900 to-black">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-5xl font-bold text-center mb-12">
+        ⭐ Lo Que Dicen Nuestros <span class="text-yellow-400">Clientes</span>
+      </h2>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 border border-gray-700 hover:border-yellow-400 transition-colors">
+          <div class="flex gap-1 mb-4">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <p class="text-gray-300 mb-4 italic">"Increíble! Lo uso en la oficina y nadie se da cuenta. La discreción es perfecta y el efecto es justo lo que necesito."</p>
+          <p class="font-bold text-yellow-400">Carlos M. - Bogotá</p>
+        </div>
+        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 border border-gray-700 hover:border-yellow-400 transition-colors">
+          <div class="flex gap-1 mb-4">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <p class="text-gray-300 mb-4 italic">"Compré 2 y estoy fascinada. El nivel azul es mi favorito para el día a día. Diseño hermoso y súper práctico."</p>
+          <p class="font-bold text-yellow-400">Ana R. - Medellín</p>
+        </div>
+        <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-6 border border-gray-700 hover:border-yellow-400 transition-colors">
+          <div class="flex gap-1 mb-4">
+            <span class="text-yellow-400">★★★★★</span>
+          </div>
+          <p class="text-gray-300 mb-4 italic">"Mejor inversión del año. Ya no tengo que salir a fumar, simplemente 3 puffs y listo. Sin olor, sin drama."</p>
+          <p class="font-bold text-yellow-400">Miguel S. - Cali</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Precios y CTA final -->
+  <section id="precio" class="py-16 px-4 bg-gradient-to-b from-black to-gray-900">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="bg-gradient-to-r from-red-500 to-pink-500 text-white inline-block px-6 py-2 rounded-full mb-6 font-bold text-lg animate-pulse">
+        🔥 OFERTA ESPECIAL - COMBO COMPLETO
+      </div>
+      
+      <h2 class="text-3xl md:text-5xl font-bold mb-8">
+        Precio Especial <span class="text-yellow-400">HOY</span>
+      </h2>
+      
+      <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-3xl p-8 md:p-12 border-2 border-yellow-400 mb-10 pulse-glow">
+        <!-- Imagen del combo en la sección de precio -->
+        <div class="mb-6">
+          <img 
+            src="public/image/COMBO DAIMUZ HAPPY.jpg" 
+            alt="Combo DAIMUZ HAPPY" 
+            class="mx-auto rounded-xl shadow-lg max-h-64 object-contain"
+          >
+        </div>
+
+        <div class="mb-6">
+          <span class="text-gray-400 line-through text-2xl">$120.000 COP</span>
+          <div class="text-5xl md:text-7xl font-black text-yellow-400 my-4">$80.000 COP</div>
+        </div>
+        
+        <ul class="text-left max-w-md mx-auto mb-8 space-y-3">
+          <li class="flex items-center gap-3 text-lg">
+            <span class="text-green-400 text-xl">✓</span>
+            <span>DAIMUZ HAPPY Vaporizador</span>
+          </li>
+          <li class="flex items-center gap-3 text-lg">
+            <span class="text-green-400 text-xl">✓</span>
+            <span>Cable de carga USB</span>
+          </li>
+
+          <li class="flex items-center gap-3 text-lg">
+            <span class="text-green-400 text-xl">✓</span>
+            <span>Cartucho DAIMUZ HAPPY incluido</span>
+          </li>
+          <li class="flex items-center gap-3 text-lg">
+            <span class="text-green-400 text-xl">✓</span>
+            <span>Garantía de 1 año</span>
+          </li>
+          <li class="flex items-center gap-3 text-lg">
+            <span class="text-green-400 text-xl">✓</span>
+            <span>Soporte WhatsApp 24/7</span>
+          </li>
+        </ul>
+
+        <a href="https://wa.me/message/56AISNOZMVW5N1" target="_blank" class="block w-full bg-gradient-to-r from-green-500 to-green-600 text-white px-12 py-5 rounded-full text-xl md:text-2xl font-bold hover:scale-105 transition-transform shadow-2xl mb-4">
+          💬 ORDENAR POR WHATSAPP
+        </a>
+        
+        <p class="text-sm text-gray-400">🔒 Pago contra entrega | 📦 Envío a toda Colombia</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 text-sm">
+        <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors">
+          <div class="text-3xl mb-2">🚚</div>
+          <p class="text-gray-300 font-semibold">Envío a toda Colombia</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors">
+          <div class="text-3xl mb-2">💵</div>
+          <p class="text-gray-300 font-semibold">Pago contra entrega</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors">
+          <div class="text-3xl mb-2">🛡️</div>
+          <p class="text-gray-300 font-semibold">Garantía 1 año</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 px-4 bg-black border-t border-gray-800">
+    <div class="max-w-6xl mx-auto text-center">
+      <div class="text-3xl font-bold mb-4">
+        <span class="text-white">DAIMUZ</span>
+        <span class="text-yellow-400"> HAPPY</span>
+      </div>
+      <p class="text-gray-400 mb-4">Tu momento de relax, siempre contigo</p>
+      <p class="text-gray-500 text-sm">© 2025 DAIMUZ. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- CTA flotante móvil -->
+  <div class="fixed bottom-4 left-0 right-0 z-50 px-4 md:hidden">
+    <a href="#precio" class="block w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-6 py-4 rounded-full text-lg font-bold shadow-2xl text-center pulse-glow">
+      🛒 COMPRAR - $80.000 COP
+    </a>
+  </div>
+
+  <script>
+    // Contador regresivo
+    let hours = 2, minutes = 34, seconds = 15;
+    
+    function updateTimer() {
+      if (seconds > 0) {
+        seconds--;
+      } else if (minutes > 0) {
+        minutes--;
+        seconds = 59;
+      } else if (hours > 0) {
+        hours--;
+        minutes = 59;
+        seconds = 59;
+      } else {
+        hours = 2; minutes = 30; seconds = 0;
+      }
+      
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+    
+    setInterval(updateTimer, 1000);
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('bg-black/95', 'backdrop-blur-lg', 'shadow-xl');
+        header.classList.remove('bg-transparent');
+      } else {
+        header.classList.remove('bg-black/95', 'backdrop-blur-lg', 'shadow-xl');
+        header.classList.add('bg-transparent');
+      }
+    });
+
+    // Control de niveles
+    const levels = {
+      red: { color: 'bg-red-500', voltage: '4.0V', title: 'NIVEL ROJO', desc: 'Potencia máxima para relajación profunda y rápida' },
+      blue: { color: 'bg-blue-500', voltage: '3.3V', title: 'NIVEL AZUL', desc: 'Equilibrio perfecto entre sabor, suavidad y efecto' },
+      green: { color: 'bg-green-500', voltage: '2.6V', title: 'NIVEL VERDE', desc: 'Suave y ligero, perfecto para relajarte sin exagerar' }
+    };
+
+    function setLevel(level) {
+      // Update buttons
+      ['red', 'blue', 'green'].forEach(l => {
+        const btn = document.getElementById('btn-' + l);
+        if (l === level) {
+          btn.className = `px-6 py-3 rounded-full font-bold transition-all ${levels[l].color} text-white shadow-2xl scale-110`;
+        } else {
+          btn.className = 'px-6 py-3 rounded-full font-bold transition-all bg-gray-700 text-gray-400 hover:bg-gray-600';
+        }
+      });
+
+      // Update display
+      const circle = document.getElementById('level-circle');
+      circle.className = `w-28 h-28 rounded-full ${levels[level].color} flex items-center justify-center shadow-2xl animate-pulse`;
+      document.getElementById('level-voltage').textContent = levels[level].voltage;
+      document.getElementById('level-title').textContent = levels[level].title;
+      document.getElementById('level-desc').textContent = levels[level].desc;
+    }
+  </script>
+</body>
+</html>
