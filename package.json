@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "DAIMUZ HAPPY - Landing Page de Producto",
   "scripts": {
-    "start": "npx serve .",
+    "start": "serve -s . -l $PORT",
     "build": "echo 'No build step required'"
   },
   "dependencies": {
