@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAIMUZ - Finalizar Compra</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .checkout-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .checkout-header {
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+            padding: 25px;
+            color: white;
+            text-align: center;
+        }
+
+        .checkout-header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .checkout-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .product-summary {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            padding: 20px 25px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .product-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .product-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-details h3 {
+            color: #4a00e0;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: #8e2de2;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .form-section {
+            padding: 25px;
+        }
+
+        .section-title {
+            color: #4a00e0;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            font-size: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group label span {
+            color: #e74c3c;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #8e2de2;
+            box-shadow: 0 0 0 3px rgba(142, 45, 226, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .color-option {
+            position: relative;
+        }
+
+        .color-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .color-option label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 13px;
+        }
+
+        .color-option input:checked + label {
+            border-color: #8e2de2;
+            background: linear-gradient(135deg, rgba(142, 45, 226, 0.1) 0%, rgba(74, 0, 224, 0.1) 100%);
+        }
+
+        .color-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .qty-btn {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #8e2de2;
+            background: white;
+            color: #8e2de2;
+            font-size: 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: #8e2de2;
+            color: white;
+        }
+
+        .qty-input {
+            width: 70px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .option-toggle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .option-toggle input {
+            display: none;
+        }
+
+        .option-toggle label {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .option-toggle input:checked + label {
+            border-color: #8e2de2;
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+            color: white;
+        }
+
+        .total-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            padding: 20px 25px;
+            border-top: 2px solid #eee;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .total-row.final {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4a00e0;
+            padding-top: 10px;
+            border-top: 2px dashed #ddd;
+            margin-top: 10px;
+        }
+
+        .submit-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(142, 45, 226, 0.4);
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(142, 45, 226, 0.5);
+        }
+
+        .submit-btn.confirmar::before {
+            content: "✅";
+            font-size: 24px;
+        }
+
+        /* Modal de pedido */
+        .order-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .order-modal-overlay.active {
+            display: flex;
+        }
+
+        .order-modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .order-modal-header {
+            background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .order-modal-header h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .order-modal-header p {
+            margin: 5px 0 0;
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .order-modal-content {
+            padding: 20px;
+        }
+
+        .order-info-box {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .order-modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-copy {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-copy.copied {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+
+        .btn-whatsapp-modal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-close-modal {
+            background: transparent;
+            border: 2px solid #e0e0e0;
+            color: #666;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-close-modal:hover {
+            background: #f0f0f0;
+        }
+
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 13px;
+            color: #856404;
+            margin-top: 15px;
+        }
+
+        .payment-steps {
+            background: linear-gradient(135deg, #e8f4fd 0%, #d1ecf1 100%);
+            border: 1px solid #bee5eb;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .payment-steps h4 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .payment-steps ol {
+            margin: 0;
+            padding-left: 20px;
+            color: #0c5460;
+            font-size: 13px;
+        }
+
+        .payment-steps li {
+            margin-bottom: 5px;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 1px solid #28a745;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .success-message.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .success-message h3 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: #155724;
+            font-size: 14px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .checkout-header {
+                padding: 20px;
+            }
+
+            .checkout-header h1 {
+                font-size: 24px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .color-options {
+                gap: 8px;
+            }
+
+            .color-option label {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+            </svg>
+            Volver al Inicio
+        </a>
+
+        <div class="checkout-card">
+            <div class="checkout-header">
+                <h1>🛒 Finalizar Compra</h1>
+                <p>Completa tus datos para realizar el pedido</p>
+            </div>
+
+            <div class="product-summary">
+                <div class="product-info">
+                    <img id="productImg" class="product-img" src="" alt="Producto">
+                    <div class="product-details">
+                        <h3 id="productName">Nombre del Producto</h3>
+                        <div class="product-price" id="productPrice">$0</div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="checkoutForm">
+                <div class="form-section">
+                    <h3 class="section-title">🎨 Opciones del Producto</h3>
+                    
+                    <div class="form-group">
+                        <label>Tipo de compra <span>*</span></label>
+                        <div class="option-toggle">
+                            <input type="radio" name="purchaseType" id="unitOnly" value="unidad" checked>
+                            <label for="unitOnly">Solo Unidad</label>
+                            <input type="radio" name="purchaseType" id="withCapsule" value="capsula">
+                            <label for="withCapsule">Con Cápsula</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Color <span>*</span></label>
+                        <div class="color-options" id="colorOptions">
+                            <div class="color-option">
+                                <input type="radio" name="color" id="colorNegro" value="Negro" checked>
+                                <label for="colorNegro">
+                                    <span class="color-dot" style="background: #1a1a1a;"></span>
+                                    Negro
+                                </label>
+                            </div>
+                            <div class="color-option">
+                                <input type="radio" name="color" id="colorBlanco" value="Blanco">
+                                <label for="colorBlanco">
+                                    <span class="color-dot" style="background: #fff; border-color: #ccc;"></span>
+                                    Blanco
+                                </label>
+                            </div>
+                            <div class="color-option">
+                                <input type="radio" name="color" id="colorDorado" value="Dorado">
+                                <label for="colorDorado">
+                                    <span class="color-dot" style="background: linear-gradient(135deg, #f5d061 0%, #c9a227 100%);"></span>
+                                    Dorado
+                                </label>
+                            </div>
+                            <div class="color-option">
+                                <input type="radio" name="color" id="colorPlata" value="Plata">
+                                <label for="colorPlata">
+                                    <span class="color-dot" style="background: linear-gradient(135deg, #e8e8e8 0%, #a8a8a8 100%);"></span>
+                                    Plata
+                                </label>
+                            </div>
+                            <div class="color-option">
+                                <input type="radio" name="color" id="colorAzul" value="Azul">
+                                <label for="colorAzul">
+                                    <span class="color-dot" style="background: #2196F3;"></span>
+                                    Azul
+                                </label>
+                            </div>
+                            <div class="color-option">
+                                <input type="radio" name="color" id="colorRojo" value="Rojo">
+                                <label for="colorRojo">
+                                    <span class="color-dot" style="background: #e74c3c;"></span>
+                                    Rojo
+                                </label>
+                            </div>
+                            <div class="color-option">
+                                <input type="radio" name="color" id="colorVerde" value="Verde">
+                                <label for="colorVerde">
+                                    <span class="color-dot" style="background: #27ae60;"></span>
+                                    Verde
+                                </label>
+                            </div>
+                            <div class="color-option">
+                                <input type="radio" name="color" id="colorMorado" value="Morado">
+                                <label for="colorMorado">
+                                    <span class="color-dot" style="background: #9b59b6;"></span>
+                                    Morado
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cantidad <span>*</span></label>
+                        <div class="quantity-selector">
+                            <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+                            <input type="number" id="quantity" class="qty-input" value="1" min="1" max="99" readonly>
+                            <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">👤 Datos Personales</h3>
+                    
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo <span>*</span></label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Ej: Juan Pérez García" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">Correo Electrónico <span>*</span></label>
+                        <input type="email" id="correo" class="form-control" placeholder="Ej: correo@ejemplo.com" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cedula">Cédula <span>*</span></label>
+                            <input type="text" id="cedula" class="form-control" placeholder="Ej: 1234567890" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="celular">Celular <span>*</span></label>
+                            <input type="tel" id="celular" class="form-control" placeholder="Ej: 3001234567" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">📦 Datos de Envío</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departamento">Departamento <span>*</span></label>
+                            <select id="departamento" class="form-control" required>
+                                <option value="">Seleccionar...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ciudad">Ciudad/Municipio <span>*</span></label>
+                            <select id="ciudad" class="form-control" required disabled>
+                                <option value="">Primero seleccione departamento</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccion">Dirección <span>*</span></label>
+                        <input type="text" id="direccion" class="form-control" placeholder="Ej: Calle 123 #45-67, Apto 101" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="barrio">Barrio <span>*</span></label>
+                        <input type="text" id="barrio" class="form-control" placeholder="Ej: Centro, La Candelaria" required>
+                    </div>
+
+                    <div class="note">
+                        📌 <strong>Nota:</strong> Los envíos se realizan únicamente dentro de Colombia. Tiempo de entrega: 1-3 días hábiles.
+                    </div>
+                </div>
+
+                <div class="total-section">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Cantidad:</span>
+                        <span id="qtyDisplay">1 unidad(es)</span>
+                    </div>
+                    <div class="total-row final">
+                        <span>TOTAL:</span>
+                        <span id="totalPrice">$0</span>
+                    </div>
+                </div>
+
+                <div class="form-section" style="padding-top: 0;">
+                    <div class="payment-steps">
+                        <h4>📋 Proceso de compra:</h4>
+                        <ol>
+                            <li>Completa tus datos personales y de envío</li>
+                            <li>Revisa tu pedido y haz clic en "Confirmar Pedido"</li>
+                            <li>Copia la información y continúa por WhatsApp</li>
+                        </ol>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="submit" class="submit-btn confirmar" id="confirmBtn">
+                            Confirmar Pedido
+                        </button>
+                    </div>
+
+                    <div class="note" style="margin-top: 15px;">
+                        💡 <strong>Importante:</strong> Al confirmar, podrás copiar tu pedido y enviarlo por WhatsApp para coordinar el pago y envío.
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Procesando tu pedido...</div>
+    </div>
+
+    <!-- Modal de Información del Pedido -->
+    <div id="orderModal" class="order-modal-overlay">
+        <div class="order-modal">
+            <div class="order-modal-header">
+                <h2>✅ ¡Pedido Confirmado!</h2>
+                <p>Copia la información y envíala por WhatsApp</p>
+            </div>
+            <div class="order-modal-content">
+                <div class="order-info-box" id="orderInfoText"></div>
+                <div class="order-modal-buttons">
+                    <button type="button" class="btn-copy" id="copyBtn">
+                        📋 Copiar Información del Pedido
+                    </button>
+                    <button type="button" class="btn-whatsapp-modal" id="whatsappModalBtn">
+                        📲 Continuar en WhatsApp
+                    </button>
+                    <button type="button" class="btn-close-modal" id="closeModalBtn">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Departamentos y Municipios de Colombia
+        const colombiaData = {
+            "Amazonas": ["Leticia", "Puerto Nariño", "El Encanto", "La Chorrera", "La Pedrera", "La Victoria", "Mirití Paraná", "Puerto Alegría", "Puerto Arica", "Puerto Santander", "Tarapacá"],
+            "Antioquia": ["Medellín", "Bello", "Itagüí", "Envigado", "Apartadó", "Turbo", "Rionegro", "Caucasia", "Copacabana", "La Estrella", "Sabaneta", "Caldas", "Girardota", "Barbosa", "Marinilla", "El Carmen de Viboral", "La Ceja", "El Retiro", "Guarne", "El Santuario", "Puerto Berrío", "Yarumal", "Santa Rosa de Osos", "Cisneros", "Segovia", "Remedios", "Amalfi", "Andes", "Jardín", "Ciudad Bolívar", "Urrao", "Santa Fe de Antioquia", "Sopetrán", "San Jerónimo", "Fredonia", "Jericó", "Támesis", "La Pintada", "Venecia", "Caramanta", "Valparaíso", "Necoclí", "San Pedro de Urabá", "Arboletes", "San Juan de Urabá", "Chigorodó", "Carepa", "Mutatá", "Dabeiba", "Frontino", "Peque", "Uramita", "Cañasgordas", "Abriaquí", "Giraldo", "Buriticá", "Liborina", "Sabanalarga", "San Andrés de Cuerquia", "Toledo", "Briceño", "Ituango", "San José de la Montaña", "Valdivia", "Tarazá", "Cáceres", "El Bagre", "Zaragoza", "Nechí", "Yondó", "Puerto Triunfo", "Sonsón", "Argelia", "Nariño", "Abejorral", "Concepción", "Alejandría", "San Rafael", "San Carlos", "Granada", "San Luis", "Cocorná", "San Francisco", "Santo Domingo", "Vegachí", "Yalí", "Yolombó", "Gómez Plata", "Guadalupe", "Carolina del Príncipe", "Santa Rosa de Osos", "Donmatías", "Entrerríos", "San Pedro de los Milagros", "Belmira"],
+            "Arauca": ["Arauca", "Arauquita", "Cravo Norte", "Fortul", "Puerto Rondón", "Saravena", "Tame"],
+            "Atlántico": ["Barranquilla", "Soledad", "Malambo", "Sabanalarga", "Baranoa", "Puerto Colombia", "Galapa", "Palmar de Varela", "Santo Tomás", "Polonuevo", "Ponedera", "Sabanagrande", "Candelaria", "Campo de la Cruz", "Manatí", "Repelón", "Santa Lucía", "Suan", "Tubará", "Usiacurí", "Juan de Acosta", "Piojó", "Luruaco"],
+            "Bogotá D.C.": ["Bogotá"],
+            "Bolívar": ["Cartagena", "Magangué", "Turbaco", "Arjona", "El Carmen de Bolívar", "San Juan Nepomuceno", "María la Baja", "Mompós", "Simití", "San Pablo", "Santa Rosa del Sur", "Morales", "Achí", "Altos del Rosario", "Arenal", "Barranco de Loba", "Calamar", "Cantagallo", "Cicuco", "Clemencia", "Córdoba", "El Guamo", "El Peñón", "Hatillo de Loba", "Margarita", "Montecristo", "Norosí", "Pinillos", "Regidor", "Río Viejo", "San Cristóbal", "San Estanislao", "San Fernando", "San Jacinto", "San Jacinto del Cauca", "San Martín de Loba", "Santa Catalina", "Santa Rosa", "Soplaviento", "Talaigua Nuevo", "Tiquisio", "Villanueva", "Zambrano"],
+            "Boyacá": ["Tunja", "Duitama", "Sogamoso", "Chiquinquirá", "Paipa", "Puerto Boyacá", "Villa de Leyva", "Moniquirá", "Garagoa", "Miraflores", "Nobsa", "Tibasosa", "Firavitoba", "Iza", "Cuítiva", "Tota", "Pesca", "Aquitania", "Tota", "Zetaquira", "Berbeo", "San Eduardo", "Macanal", "Santa María", "Campohermoso", "Páez", "Chita", "Jericó", "Socotá", "Socha", "Tasco", "Paz de Río", "Betéitiva", "Busbanzá", "Corrales", "Floresta", "Tutazá", "Belén", "Cerinza", "Santa Rosa de Viterbo", "Sativanorte", "Sativasur", "Susacón", "Tipacoque", "Covarachía", "Boavita", "La Uvita", "San Mateo", "Guacamayas", "El Cocuy", "Güicán", "Panqueba", "El Espino", "Cubará", "Labranzagrande", "Paya", "Pisba", "Mongua", "Gámeza", "Tópaga", "Monguí", "Ráquira", "Sutamarchán", "Tinjacá", "Saboyá", "San Miguel de Sema", "Caldas", "Buenavista", "Coper", "La Victoria", "Maripí", "Muzo", "Otanche", "Pauna", "Quípama", "San Pablo de Borbur", "Tununguá", "Briceño", "Tunungua", "Maripi"],
+            "Caldas": ["Manizales", "La Dorada", "Chinchiná", "Villamaría", "Riosucio", "Anserma", "Supía", "Aguadas", "Pácora", "Salamina", "Aranzazu", "Filadelfia", "La Merced", "Marmato", "Neira", "Palestina", "Pensilvania", "Manzanares", "Marquetalia", "Marulanda", "Samaná", "Victoria", "Belalcázar", "Risaralda", "San José", "Viterbo", "Norcasia"],
+            "Caquetá": ["Florencia", "San Vicente del Caguán", "Puerto Rico", "El Doncello", "El Paujil", "Cartagena del Chairá", "Montañita", "Belén de los Andaquíes", "Albania", "Curillo", "Milán", "Morelia", "San José del Fragua", "Solano", "Solita", "Valparaíso"],
+            "Casanare": ["Yopal", "Aguazul", "Villanueva", "Tauramena", "Paz de Ariporo", "Pore", "Trinidad", "San Luis de Palenque", "Orocué", "Nunchía", "Hato Corozal", "Támara", "Monterrey", "Sabanalarga", "Recetor", "Chámeza", "La Salina", "Sácama", "Maní"],
+            "Cauca": ["Popayán", "Santander de Quilichao", "Puerto Tejada", "Patía", "Piendamó", "Cajibío", "Silvia", "Timbío", "Bolívar", "Miranda", "Corinto", "Caloto", "Guachené", "Villarrica", "Padilla", "Buenos Aires", "Suárez", "Morales", "El Tambo", "Argelia", "Balboa", "Mercaderes", "Florencia", "La Sierra", "La Vega", "Almaguer", "San Sebastián", "Santa Rosa", "Rosas", "Sotará", "Puracé", "Totoró", "Inzá", "Páez", "Jambaló", "Toribío", "Caldono", "López de Micay", "Timbiquí", "Guapi"],
+            "Cesar": ["Valledupar", "Aguachica", "Agustín Codazzi", "Bosconia", "Chimichagua", "Chiriguaná", "Curumaní", "El Copey", "El Paso", "Gamarra", "González", "La Gloria", "La Jagua de Ibirico", "La Paz", "Manaure Balcón del Cesar", "Pailitas", "Pelaya", "Pueblo Bello", "Río de Oro", "San Alberto", "San Diego", "San Martín", "Tamalameque"],
+            "Chocó": ["Quibdó", "Istmina", "Tadó", "Condoto", "Bahía Solano", "Nuquí", "Acandí", "Unguía", "Riosucio", "Carmen del Darién", "Bojayá", "Medio Atrato", "Atrato", "Lloró", "Bagadó", "Certeguí", "Unión Panamericana", "Cértegui", "Cantón de San Pablo", "Medio Baudó", "Bajo Baudó", "Litoral del San Juan", "Sipí", "Nóvita", "San José del Palmar", "El Carmen de Atrato", "El Litoral del San Juan", "Juradó", "Alto Baudó", "Medio San Juan", "Río Iró", "Río Quito"],
+            "Córdoba": ["Montería", "Cereté", "Sahagún", "Lorica", "Montelíbano", "Planeta Rica", "Tierralta", "Ciénaga de Oro", "San Andrés de Sotavento", "San Pelayo", "San Carlos", "Chinú", "Puerto Escondido", "Moñitos", "Los Córdobas", "Canalete", "Valencia", "Pueblo Nuevo", "La Apartada", "Buenavista", "Ayapel", "San Bernardo del Viento", "Purísima", "Momil", "Chimá", "Cotorra", "San Antero", "Tuchín"],
+            "Cundinamarca": ["Soacha", "Facatativá", "Zipaquirá", "Chía", "Fusagasugá", "Girardot", "Madrid", "Mosquera", "Funza", "Cajicá", "Sibaté", "Tocancipá", "Sopó", "La Calera", "Cota", "Tabio", "Tenjo", "Subachoque", "El Rosal", "Bojacá", "Zipacón", "Cachipay", "Anolaima", "La Mesa", "Anapoima", "Apulo", "Viotá", "Tocaima", "Agua de Dios", "Ricaurte", "Nilo", "Jerusalén", "Guataquí", "Beltrán", "Pulí", "San Juan de Rioseco", "Chaguaní", "Guayabal de Síquima", "Bituima", "Vianí", "Albán", "Sasaima", "Villeta", "Útica", "Quebradanegra", "Nimaima", "Nocaima", "Vergara", "La Palma", "Yacopí", "Caparrapí", "El Peñón", "Topaipí", "Paime", "Villagómez", "San Cayetano", "Puerto Salgar", "Guaduas", "Supatá", "Carmen de Carupa", "Cucunubá", "Fúquene", "Guachetá", "Lenguazaque", "Simijaca", "Susa", "Sutatausa", "Tausa", "Ubaté", "Nemocón", "Cogua", "Gachancipá", "Suesca", "Sesquilé", "Chocontá", "Villapinzón", "Tibiritá", "Machetá", "Manta", "Guatavita", "Guasca", "Junín", "Gachalá", "Ubalá", "Gama", "Gachetá", "Medina", "Paratebueno", "La Vega", "San Francisco", "Fosca", "Gutiérrez", "Une", "Chipaque", "Cáqueza", "Ubaque", "Choachí", "Fómeque", "Quetame", "Guayabetal", "Arbeláez", "San Bernardo", "Pandi", "Venecia", "Cabrera", "Pasca", "Silvania", "Granada", "Tibacuy"],
+            "Guainía": ["Inírida", "Barranco Minas", "Mapiripana", "San Felipe", "Puerto Colombia", "La Guadalupe", "Cacahual", "Pana Pana", "Morichal"],
+            "Guaviare": ["San José del Guaviare", "Calamar", "El Retorno", "Miraflores"],
+            "Huila": ["Neiva", "Pitalito", "Garzón", "La Plata", "Campoalegre", "Palermo", "Algeciras", "Colombia", "Rivera", "Aipe", "Villavieja", "Tello", "Baraya", "Yaguará", "Hobo", "Gigante", "Agrado", "Altamira", "Guadalupe", "Suaza", "Acevedo", "Timaná", "Elías", "Oporapa", "Saladoblanco", "Isnos", "San Agustín", "Palestina", "Pital", "Tesalia", "Paicol", "Nátaga", "Íquira", "Teruel", "Santa María", "Tarqui"],
+            "La Guajira": ["Riohacha", "Maicao", "Uribia", "Manaure", "San Juan del Cesar", "Fonseca", "Barrancas", "Villanueva", "El Molino", "Urumita", "La Jagua del Pilar", "Hatonuevo", "Albania", "Distracción", "Dibulla"],
+            "Magdalena": ["Santa Marta", "Ciénaga", "Fundación", "El Banco", "Plato", "Aracataca", "Pivijay", "Zona Bananera", "El Retén", "Algarrobo", "Ariguaní", "Cerro de San Antonio", "Chibolo", "Concordia", "El Piñón", "Guamal", "Nueva Granada", "Pedraza", "Pijiño del Carmen", "Puebloviejo", "Remolino", "Sabanas de San Ángel", "Salamina", "San Sebastián de Buenavista", "San Zenón", "Santa Ana", "Santa Bárbara de Pinto", "Sitionuevo", "Tenerife", "Zapayán"],
+            "Meta": ["Villavicencio", "Acacías", "Granada", "Puerto López", "San Martín", "Cumaral", "Restrepo", "Puerto Gaitán", "Guamal", "Castilla la Nueva", "San Carlos de Guaroa", "Barranca de Upía", "Cabuyaro", "Puerto Lleras", "Puerto Rico", "Vista Hermosa", "San Juan de Arama", "Mesetas", "Lejanías", "El Castillo", "El Dorado", "Uribe", "La Macarena", "Mapiripán", "Puerto Concordia", "La Uribe", "El Calvario", "San Juanito", "Fuente de Oro"],
+            "Nariño": ["Pasto", "Tumaco", "Ipiales", "Túquerres", "La Unión", "Samaniego", "Sandoná", "Barbacoas", "El Charco", "Olaya Herrera", "La Tola", "Magüí Payán", "Roberto Payán", "Francisco Pizarro", "Mosquera", "Santa Bárbara", "Cumbitara", "Policarpa", "Los Andes", "El Rosario", "Leiva", "El Tambo", "Taminango", "San Lorenzo", "Arboleda", "San Pedro de Cartago", "Albán", "Buesaco", "Chachagüí", "El Tablón de Gómez", "La Florida", "Nariño", "Tangua", "Yacuanquer", "Consacá", "Ancuya", "Linares", "La Llanada", "Sotomayor", "Santacruz", "Sapuyes", "Ospina", "Iles", "Gualmatán", "Contadero", "Córdoba", "Puerres", "Funes", "Potosí", "Cuaspud Carlosama", "Aldana", "Guachucal", "Cumbal", "Mallama", "Ricaurte"],
+            "Norte de Santander": ["Cúcuta", "Ocaña", "Pamplona", "Villa del Rosario", "Los Patios", "Tibú", "El Zulia", "Puerto Santander", "San Cayetano", "Sardinata", "Abrego", "La Playa", "Hacarí", "San Calixto", "Teorama", "Convención", "El Carmen", "El Tarra", "Bucarasica", "Lourdes", "Gramalote", "Santiago", "Villacaro", "Salazar", "Arboledas", "Cucutilla", "Durania", "Bochalema", "Chinácota", "Ragonvalia", "Herrán", "Toledo", "Labateca", "Chitagá", "Silos", "Cácota", "Mutiscua", "Pamplonita", "Cáchira", "La Esperanza", "Ábrego"],
+            "Putumayo": ["Mocoa", "Puerto Asís", "Orito", "Valle del Guamuez", "Villagarzón", "Puerto Guzmán", "Puerto Caicedo", "San Miguel", "Puerto Leguízamo", "Sibundoy", "Colón", "Santiago", "San Francisco"],
+            "Quindío": ["Armenia", "Calarcá", "Montenegro", "Quimbaya", "La Tebaida", "Circasia", "Filandia", "Salento", "Génova", "Pijao", "Buenavista", "Córdoba"],
+            "Risaralda": ["Pereira", "Dosquebradas", "Santa Rosa de Cabal", "La Virginia", "Marsella", "Belén de Umbría", "Apía", "Santuario", "Quinchía", "Guática", "Mistrató", "Pueblo Rico", "Balboa", "La Celia"],
+            "San Andrés y Providencia": ["San Andrés", "Providencia"],
+            "Santander": ["Bucaramanga", "Floridablanca", "Girón", "Piedecuesta", "Barrancabermeja", "San Gil", "Socorro", "Vélez", "Barbosa", "Puerto Wilches", "Cimitarra", "Málaga", "Charalá", "Oiba", "Curití", "Aratoca", "Villanueva", "Barichara", "Cabrera", "Palmas del Socorro", "Guapotá", "Contratación", "El Guacamayo", "Galán", "Gambita", "Guadalupe", "Guavatá", "Hato", "Jesús María", "La Paz", "Puente Nacional", "Suaita", "Sucre", "Zapatoca", "Los Santos", "Jordán", "Cepitá", "San Joaquín", "Onzaga", "Mogotes", "Ocamonte", "Páramo", "San José de Miranda", "Enciso", "Capitanejo", "San Miguel", "Carcasí", "Macaravita", "Concepción", "Cerrito", "Molagavita", "Guaca", "San Andrés", "Tona", "Charta", "California", "Vetas", "Suratá", "Matanza", "El Playón", "Rionegro", "Lebrija", "Sabana de Torres", "Puerto Parra", "Simacota", "El Carmen de Chucurí", "San Vicente de Chucurí", "Betulia", "Landázuri", "Bolívar", "El Peñón", "La Belleza", "Florián", "Albania", "Aguada", "San Benito", "La Paz", "Güepsa", "Barbosa", "Chipatá", "San José de Pare", "Moniquirá", "Togüí", "Santana", "Cimitarra"],
+            "Sucre": ["Sincelejo", "Corozal", "San Marcos", "Sampués", "Tolú", "San Onofre", "Sincé", "Majagual", "Sucre", "Ovejas", "Los Palmitos", "Morroa", "Chalán", "Coloso", "Galeras", "El Roble", "San Pedro", "Buenavista", "Coveñas", "Toluviejo", "San Antonio de Palmito", "Guaranda", "La Unión", "Caimito", "San Benito Abad"],
+            "Tolima": ["Ibagué", "Espinal", "Melgar", "Chaparral", "Honda", "Mariquita", "Líbano", "Fresno", "Guamo", "Purificación", "Saldaña", "Lérida", "Venadillo", "Piedras", "Coello", "Flandes", "San Luis", "Suárez", "Carmen de Apicalá", "Cunday", "Villarrica", "Dolores", "Alpujarra", "Prado", "Natagaima", "Coyaima", "Ortega", "San Antonio", "Rovira", "Valle de San Juan", "Roncesvalles", "San José", "Cajamarca", "Anzoátegui", "Santa Isabel", "Murillo", "Villahermosa", "Casabianca", "Herveo", "Palocabildo", "Fálan", "Ambalema", "Armero", "Alvarado", "Piedras", "Icononzo", "Planadas", "Rioblanco", "Ataco"],
+            "Valle del Cauca": ["Cali", "Buenaventura", "Palmira", "Tuluá", "Buga", "Cartago", "Yumbo", "Jamundí", "Candelaria", "Florida", "Pradera", "Zarzal", "Roldanillo", "Sevilla", "Caicedonia", "La Unión", "Trujillo", "Bugalagrande", "Andalucía", "San Pedro", "Guacarí", "Ginebra", "El Cerrito", "Dagua", "La Cumbre", "Restrepo", "Vijes", "Yotoco", "Riofrío", "Bolívar", "Versalles", "El Dovio", "Argelia", "El Cairo", "Ansermanuevo", "El Águila", "Ulloa", "Alcalá", "Obando", "La Victoria", "Toro", "Calima El Darién"],
+            "Vaupés": ["Mitú", "Carurú", "Taraira", "Papunaua", "Yavaraté", "Pacoa"],
+            "Vichada": ["Puerto Carreño", "La Primavera", "Santa Rosalía", "Cumaribo"]
+        };
+
+        // Product data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = decodeURIComponent(urlParams.get('product') || 'Producto');
+        const productPrice = parseInt(urlParams.get('price')) || 0;
+        const productPriceCapsule = parseInt(urlParams.get('priceCapsule')) || productPrice;
+        const productImage = decodeURIComponent(urlParams.get('image') || '');
+
+        // Debug: log the values
+        console.log('Product:', productName, 'Price:', productPrice, 'Image:', productImage);
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set product info
+            document.getElementById('productName').textContent = productName;
+            document.getElementById('productPrice').textContent = formatPrice(productPrice);
+            
+            // Handle image loading with fallback
+            const imgElement = document.getElementById('productImg');
+            if (productImage) {
+                // First try the image path as-is
+                imgElement.src = productImage;
+                imgElement.onerror = function() {
+                    // Try with encoded spaces if first attempt fails
+                    const encodedPath = productImage.replace(/ /g, '%20');
+                    if (!this.src.includes(encodedPath)) {
+                        this.src = encodedPath;
+                        this.onerror = function() {
+                            // Final fallback - show placeholder
+                            this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect fill="%238e2de2" width="80" height="80"/><text x="50%" y="50%" fill="white" text-anchor="middle" dy=".3em" font-size="12">Producto</text></svg>';
+                        };
+                    }
+                };
+            } else {
+                // No image provided - show placeholder
+                imgElement.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect fill="%238e2de2" width="80" height="80"/><text x="50%" y="50%" fill="white" text-anchor="middle" dy=".3em" font-size="12">Producto</text></svg>';
+            }
+            
+            // Populate departments
+            const deptSelect = document.getElementById('departamento');
+            Object.keys(colombiaData).sort().forEach(dept => {
+                const option = document.createElement('option');
+                option.value = dept;
+                option.textContent = dept;
+                deptSelect.appendChild(option);
+            });
+
+            // Department change handler
+            deptSelect.addEventListener('change', function() {
+                const citySelect = document.getElementById('ciudad');
+                citySelect.innerHTML = '<option value="">Seleccionar...</option>';
+                
+                if (this.value) {
+                    citySelect.disabled = false;
+                    colombiaData[this.value].sort().forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        option.textContent = city;
+                        citySelect.appendChild(option);
+                    });
+                } else {
+                    citySelect.disabled = true;
+                }
+            });
+
+            // Update totals
+            updateTotals();
+
+            // Purchase type change
+            document.querySelectorAll('input[name="purchaseType"]').forEach(radio => {
+                radio.addEventListener('change', updateTotals);
+            });
+        });
+
+        function formatPrice(price) {
+            return '$' + price.toLocaleString('es-CO');
+        }
+
+        function changeQty(delta) {
+            const input = document.getElementById('quantity');
+            let value = parseInt(input.value) + delta;
+            if (value < 1) value = 1;
+            if (value > 99) value = 99;
+            input.value = value;
+            updateTotals();
+        }
+
+        function updateTotals() {
+            const qty = parseInt(document.getElementById('quantity').value);
+            const isWithCapsule = document.getElementById('withCapsule').checked;
+            const unitPrice = isWithCapsule ? productPriceCapsule : productPrice;
+            const total = unitPrice * qty;
+
+            document.getElementById('subtotal').textContent = formatPrice(unitPrice);
+            document.getElementById('qtyDisplay').textContent = qty + ' unidad(es)';
+            document.getElementById('totalPrice').textContent = formatPrice(total);
+            document.getElementById('productPrice').textContent = formatPrice(unitPrice) + (isWithCapsule ? ' (con cápsula)' : '');
+        }
+
+        // Store order data
+        let currentOrderData = null;
+
+        // Build order text for copying
+        function buildOrderText(orderData) {
+            return `🛒 PEDIDO DAIMUZ
+═══════════════════════
+
+📦 PRODUCTO:
+• ${orderData.productName}
+• Tipo: ${orderData.purchaseType === 'capsula' ? 'Con Cápsula' : 'Solo Unidad'}
+• Color: ${orderData.color}
+• Cantidad: ${orderData.qty}
+• Precio unitario: ${formatPrice(orderData.unitPrice)}
+• TOTAL: ${formatPrice(orderData.total)}
+
+👤 DATOS DEL CLIENTE:
+• Nombre: ${orderData.nombre}
+• Correo: ${orderData.correo}
+• Cédula: ${orderData.cedula}
+• Celular: ${orderData.celular}
+
+📍 DATOS DE ENVÍO:
+• Departamento: ${orderData.departamento}
+• Ciudad: ${orderData.ciudad}
+• Dirección: ${orderData.direccion}
+• Barrio: ${orderData.barrio}
+
+📅 Fecha: ${new Date().toLocaleString('es-CO')}
+
+¡Pendiente! `;
+        }
+
+        // Build WhatsApp message
+        function buildWhatsAppMessage(orderData) {
+            return `🛒 *NUEVO PEDIDO DAIMUZ*
+
+📦 *PRODUCTO:*
+• ${orderData.productName}
+• Tipo: ${orderData.purchaseType === 'capsula' ? 'Con Cápsula' : 'Solo Unidad'}
+• Color: ${orderData.color}
+• Cantidad: ${orderData.qty}
+• Precio unitario: ${formatPrice(orderData.unitPrice)}
+• *TOTAL: ${formatPrice(orderData.total)}*
+
+👤 *DATOS DEL CLIENTE:*
+• Nombre: ${orderData.nombre}
+• Correo: ${orderData.correo}
+• Cédula: ${orderData.cedula}
+• Celular: ${orderData.celular}
+
+📍 *DATOS DE ENVÍO:*
+• Departamento: ${orderData.departamento}
+• Ciudad: ${orderData.ciudad}
+• Dirección: ${orderData.direccion}
+• Barrio: ${orderData.barrio}
+
+¡!Pendiente`;
+        }
+
+        // Show order modal
+        function showOrderModal(orderData) {
+            const orderText = buildOrderText(orderData);
+            document.getElementById('orderInfoText').textContent = orderText;
+            document.getElementById('orderModal').classList.add('active');
+        }
+
+        // Hide order modal
+        function hideOrderModal() {
+            document.getElementById('orderModal').classList.remove('active');
+        }
+
+        // Copy to clipboard
+        async function copyOrderToClipboard() {
+            const orderText = document.getElementById('orderInfoText').textContent;
+            try {
+                await navigator.clipboard.writeText(orderText);
+                const copyBtn = document.getElementById('copyBtn');
+                copyBtn.innerHTML = '✅ ¡Copiado!';
+                copyBtn.classList.add('copied');
+                setTimeout(() => {
+                    copyBtn.innerHTML = '📋 Copiar Información del Pedido';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = orderText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                const copyBtn = document.getElementById('copyBtn');
+                copyBtn.innerHTML = '✅ ¡Copiado!';
+                copyBtn.classList.add('copied');
+                setTimeout(() => {
+                    copyBtn.innerHTML = '📋 Copiar Información del Pedido';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }
+        }
+
+        // Form submission
+        document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Gather form data
+            const qty = parseInt(document.getElementById('quantity').value);
+            const purchaseType = document.querySelector('input[name="purchaseType"]:checked').value;
+            const color = document.querySelector('input[name="color"]:checked').value;
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            const cedula = document.getElementById('cedula').value;
+            const celular = document.getElementById('celular').value;
+            const departamento = document.getElementById('departamento').value;
+            const ciudad = document.getElementById('ciudad').value;
+            const direccion = document.getElementById('direccion').value;
+            const barrio = document.getElementById('barrio').value;
+
+            const isWithCapsule = purchaseType === 'capsula';
+            const unitPrice = isWithCapsule ? productPriceCapsule : productPrice;
+            const total = unitPrice * qty;
+
+            // Store order data
+            currentOrderData = {
+                productName,
+                purchaseType,
+                color,
+                qty,
+                unitPrice,
+                total,
+                nombre,
+                correo,
+                cedula,
+                celular,
+                departamento,
+                ciudad,
+                direccion,
+                barrio,
+                fecha: new Date().toISOString()
+            };
+
+            // Show loading briefly
+            document.getElementById('loadingOverlay').classList.add('active');
+            
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.remove('active');
+                // Show order modal
+                showOrderModal(currentOrderData);
+            }, 500);
+        });
+
+        // Copy button event
+        document.getElementById('copyBtn').addEventListener('click', copyOrderToClipboard);
+
+        // WhatsApp button in modal
+        document.getElementById('whatsappModalBtn').addEventListener('click', function() {
+            if (currentOrderData) {
+                const message = buildWhatsAppMessage(currentOrderData);
+                const encodedMessage = encodeURIComponent(message);
+                window.open(`https://wa.me/message/56AISNOZMVW5N1?text=${encodedMessage}`, '_blank');
+            }
+        });
+
+        // Close modal button
+        document.getElementById('closeModalBtn').addEventListener('click', hideOrderModal);
+
+        // Close modal when clicking outside
+        document.getElementById('orderModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideOrderModal();
+            }
+        });
+    </script>
+</body>
+</html>
