@@ -941,14 +941,15 @@
 
         function updateTotals() {
             const qty = parseInt(document.getElementById('quantity').value);
-            const isWithCapsule = document.getElementById('withCapsule').checked;
+            const purchaseType = document.querySelector('input[name="purchaseType"]:checked');
+            const isWithCapsule = purchaseType ? purchaseType.value === 'capsula' : false;
             const unitPrice = isWithCapsule ? productPriceCapsule : productPrice;
             const total = unitPrice * qty;
 
             document.getElementById('subtotal').textContent = formatPrice(unitPrice);
             document.getElementById('qtyDisplay').textContent = qty + ' unidad(es)';
             document.getElementById('totalPrice').textContent = formatPrice(total);
-            document.getElementById('productPrice').textContent = formatPrice(unitPrice) + (isWithCapsule ? ' (con cápsula)' : '');
+            document.getElementById('productPrice').textContent = formatPrice(unitPrice);
         }
 
         // Store order data
